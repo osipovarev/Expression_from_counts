@@ -50,6 +50,8 @@ sp1=rainbow_lorikeet; sp2=cockatiel
 # do for all 3 pairs of species
 for gene in ANK2 ANO1 JADE1 FANCM FAT1 FAT4 GRIP1 GRIP2 SNX19 HK1 HK2 HK3 GCK HKDC1 GRIK1 GRIK3 GRIK4 HYAL1 HYAL2; \
 do \
+   if [ ! -d $gene ]; then
+   echo $gene; \
    md $gene; \
    for norm in $(ls $RNADIR/norm_counts.deseq2_res.*.tsv); \
    do \
@@ -57,6 +59,7 @@ do \
    done >> $gene/norm_counts.tsv; \
    awk 'NF==3{print}' $gene/norm_counts.tsv > file; \
    cat <(echo -e "count\tbird\ttissue") file > $gene/norm_counts.tsv; \
+   fi;
 done
 
 
