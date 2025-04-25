@@ -100,6 +100,7 @@ t=SI_rna-XM_002194436.3
 for l in $(grep $db $INFO | cut -f1); do count=$(grep $t $RNADIR/Kallisto_quant_ALL/$l/validated.abundance.tsv | cut -f4 ); info=$(grep $l $INFO | cut -f3,4);  echo -e "$count\t$info"; done >> $g/norm_counts.tsv
 ```
 
+
 ### Recover AMY1A expression data for lorikeet and cockatiel
 ```
 g=AMY1A
@@ -113,3 +114,22 @@ t=AMY1A_mRNA16263
 # for both run:
 for l in $(grep $db $INFO | cut -f1); do count=$(grep $t $RNADIR/Kallisto_quant_ALL/$l/validated.abundance.tsv | cut -f4 ); info=$(grep $l $INFO | cut -f3,4);  echo -e "$count\t$info"; done >> $g/norm_counts.tsv
 ```
+
+
+### Recover AMY2A expression data for lorikeet and cockatiel
+```
+g=AMY2A
+
+for db in calAnn apuApu triMol nymHol phyNov taeGut; \
+do \
+  for l in $(grep $db $INFO | cut -f1); \
+  do \
+    count=$(grep $g $RNADIR/Kallisto_quant_ALL/$l/validated.abundance.tsv | cut -f4 | sum_stdin.py); \
+    info=$(grep $l $INFO | cut -f3,4); \
+    echo -e "$count\t$info"; \
+  done >> $g/norm_counts.tsv;
+done
+```
+
+
+
