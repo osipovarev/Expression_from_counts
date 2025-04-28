@@ -116,7 +116,7 @@ for l in $(grep $db $INFO | cut -f1); do count=$(grep $t $RNADIR/Kallisto_quant_
 ```
 
 
-### Recover AMY2A expression data for lorikeet and cockatiel
+### Recover AMY2A expression data for all
 ```
 g=AMY2A
 
@@ -131,5 +131,21 @@ do \
 done
 ```
 
+
+### Recover TAS2R4 and TAS2R7 expression data for all
+```
+for g in TAS2R4 TAS2R7; \
+do \
+  for db in calAnn apuApu triMol nymHol phyNov taeGut; \
+  do \
+    for l in $(grep $db $INFO | cut -f1); \
+    do \
+      count=$(grep ${g}_ $RNADIR/Kallisto_quant_ALL/$l/validated.abundance.tsv | cut -f4 | sum_stdin.py); \
+      info=$(grep $l $INFO | cut -f3,4); \
+      echo -e "$count\t$info"; \
+    done >> $g/norm_counts.tsv;
+  done; \
+done
+```
 
 
