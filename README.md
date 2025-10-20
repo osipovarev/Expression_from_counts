@@ -34,6 +34,8 @@ done
 
 
 
+## 3. Recover specific genes
+
 ### Check expression of target ChREBP genes!
 gene lists are from: [Iizuka et al, 2017](https://doi.org/10.1016/j.bbadis.2016.11.029)
 
